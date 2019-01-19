@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../static/css/base.css">
+</head>
+
+
+<body>
+  <a href="{% url 'logout' %}" class="log_out" name="log_out">ログアウト</a>
+  <h1>社員一覧</h1>
+  <table>
+    <caption>
+      <a href="{% url 'detail' %}"><input type="submit" value="新規登録" class="add"/></a>
+    </caption>
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>会社</th>
+        <th>事業部</th>
+        <th>氏名</th>
+        <th>氏名(ひらがな)</th>
+        <th>年齢</th>
+        <th>担当管理営業</th>
+        <th>入社日</th>
+        <th>稼働状況</th>
+        <th>詳細</th>
+        <th>削除</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for list in list %}
+      <tr>
+        <td>{{ list.count_up }}</td>
+        <td>{{ list.company_name }}</td>
+        <td>
+          {% if list.department == "0" %}
+            開発
+          {% endif %}
+          {% if list.department == "1" %}
+            NW
+          {% endif %}
+          {% if list.department == "2" %}
+            検証
+          {% endif %}
+          {% if list.department == "3" %}
+            オフィス
+          {% endif %}
+          {% if list.department == "4" %}
+            管理
+          {% endif %}
+        </td>
+        <td>{{ list.name }}</td>
+        <td>{{ list.name_hiragana }}</td>
+        <td>{{ list.birthday }}</td>
+        <td>{{ list.business_manager }}</td>
+        <td>{{ list.enter_date }}</td>
+        <td>
+          {% if list.commissioning_status == "0" %}
+            稼働
+          {% endif %}
+          {% if list.commissioning_status == "1" %}
+            未稼働
+          {% endif %}
+        </td>
+        <td><a href="http://dev.test.com:8002/detail%empId={{ list.employee_id }}">詳細</a></td>
+        <td><a href="http://dev.test.com:8002/delete%empId={{ list.employee_id }}" onclick="return confirm('{{ list.count_up }}、{{ list.name }}を削除しますか？')">削除</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

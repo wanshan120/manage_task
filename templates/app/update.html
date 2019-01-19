@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../static/css/base.css">
+</head>
+
+<body>
+  <h1>社員詳細</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="detail_container">
+
+      <fieldset class="">
+        <label>氏名</label>
+        <span><input name="name" maxlengtfh="20" type="text" value="{{ form_value.name }}"></span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>氏名(ひらがな)</label>
+        <span><input name="name_hiragana" maxlength="20" type="text" value="{{ form_value.name_hiragana }}" /></span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>生年月日</label>
+        <span><input name="birthday" maxlength="10" type="text" value="{{ form_value.birthday }}" /></span>
+      </fieldset>
+
+      <fieldset class="radio">
+        <label>性別</label>
+        <span>
+          {% if form_value.sex == "0" %}
+            <input type="radio" name="sex" value="0" checked="checked">男
+            <input type="radio" name="sex" value="1">女
+          {% else %}
+            <input type="radio" name="sex" value="0">男
+            <input type="radio" name="sex" value="1" checked="checked">女
+          {% endif %}
+        </span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>メールアドレス</label>
+        <span><input name="mail_address" maxlength="50" type="email" value="{{ form_value.mail_address }}" /></span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>電話番号</label>
+        <span><input name="telephone_number" maxlength="13" type="tel" value="{{ form_value.telephone_number }}" /></span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>所属会社</label>
+        <span>
+          <select id="company_info_id" name="company_info_id">
+            {% for list in form_dict %}
+              <option value="{{ list.0 }}">{{ list.1 }}</option>
+            {% endfor %}
+          </select>
+        </span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>担当管理営業</label>
+        <span><input name="business_manager" maxlength="20" type="text" value="{{ form_value.business_manager }}" /></span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>事業部</label>
+        <span>
+          <select id="department" name="department">
+            {% if form_value.department == "0" %}
+              <option value="0" selected>開発</option>
+              <option value="1">NW</option>
+              <option value="2">検証</option>
+              <option value="3">オフィス</option>
+              <option value="4">管理</option>
+            {% else %}
+            {% endif %}
+            {% if form_value.department == "1" %}
+              <option value="0">開発</option>
+              <option value="1" selected>NW</option>
+              <option value="2">検証</option>
+              <option value="3">オフィス</option>
+              <option value="4">管理</option>
+            {% else %}
+            {% endif %}
+            {% if form_value.department == "2" %}
+              <option value="0">開発</option>
+              <option value="1">NW</option>
+              <option value="2" selected>検証</option>
+              <option value="3">オフィス</option>
+              <option value="4">管理</option>
+            {% else %}
+            {% endif %}
+            {% if form_value.department == "3" %}
+              <option value="0">開発</option>
+              <option value="1">NW</option>
+              <option value="2">検証</option>
+              <option value="3" selected>オフィス</option>
+              <option value="4">管理</option>
+            {% else %}
+            {% endif %}
+            {% if form_value.department == "4" %}
+              <option value="0">開発</option>
+              <option value="1">NW</option>
+              <option value="2">検証</option>
+              <option value="3">オフィス</option>
+              <option value="4" selected>管理</option>
+            {% else %}
+            {% endif %}
+          </select>
+        </span>
+      </fieldset>
+
+      <fieldset class="radio">
+        <label>稼働状況</label>
+        <span>
+          {% if form_value.commissioning_status == "0" %}
+            <input type="radio" name="commissioning_status" value="0" checked="checked"/>稼働
+            <input type="radio" name="commissioning_status" value="1"/>未稼働
+          {% endif %}
+          {% if form_value.commissioning_status == "1" %}
+            <input type="radio" name="commissioning_status" value="0"/>稼働
+            <input type="radio" name="commissioning_status" value="1" checked="checked"/>未稼働
+          {% endif %}
+        </span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>入社日</label>
+        <span><input  maxlength="10" type="text" name="enter_date" value="{{ state_value.enter_date }}" /></span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>退社日</label>
+        <span><input  maxlength="10" type="text" name="retire_date" value="{{ state_value.retire_date }}" /></span>
+      </fieldset>
+
+      <fieldset class="">
+        <label>ステータス</label>
+        <span>
+          <select id="status" name="status">
+            {% if state_value.status == "0" %}
+              <option value="0" selected>在籍</option>
+              <option value="1">退職</option>
+              <option value="2">入社時</option>
+              <option value="3">入社取り消し</option>
+            {% endif %}
+            {% if state_value.status == "1" %}
+              <option value="0">在籍</option>
+              <option value="1" selected>退職</option>
+              <option value="2">入社時</option>
+              <option value="3">入社取り消し</option>
+            {% endif %}
+            {% if state_value.status == "2" %}
+              <option value="0">在籍</option>
+              <option value="1">退職</option>
+              <option value="2" selected>入社時</option>
+              <option value="3">入社取り消し</option>
+            {% endif %}
+            {% if state_value.status == "3" %}
+              <option value="0">在籍</option>
+              <option value="1">退職</option>
+              <option value="2">入社時</option>
+              <option value="3" selected>入社取り消し</option>
+            {% endif %}
+          </select>
+        </span>
+      </fieldset>
+
+    </div>
+    <input type="submit" value="更新" name="update" onclick="return confirm('更新しますか？')"/>
+    <input type="submit" value="戻る" name="back"/>
+  </form>
+</body>
+</html>

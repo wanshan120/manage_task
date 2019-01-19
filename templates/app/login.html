@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="../static/css/base.css">
+</head>
+
+
+<body>
+  <h1>社員管理システム</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div class="login_container">
+      <fieldset class="login_id">
+        <label for="id_login_id">ログインID</label>
+        <span><input  maxlength="20" name="login_id" type="text" id="id_login_id"/></span>
+      </fieldset>
+      <fieldset class="login_id">
+        <label for="id_login_pw">パスワード</label>
+        <span><input  maxlength="20" name="login_pw" type="password" required id="id_login_pw"/></span>
+      </fieldset>
+    </div>
+    <input type="submit" value="ログイン"/>
+  </form>
+  {% if login_error %}
+    {{ login_error }}
+  {% endif %}
+</body>
+</html>
